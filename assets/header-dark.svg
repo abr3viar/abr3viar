@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 200" width="540" height="200" role="img" aria-labelledby="t">
+<title id="t">abreviar, com o e riscado e trocado por 3: abr3viar</title>
+<style>
+  g { fill: none; stroke: #e6edf3; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+  .dot { fill: #e6edf3; stroke: none; }
+  .e { stroke: #6e7681; }
+  .strike, .three { fill: none; stroke: #00f7ff; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  .strike { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .strike { stroke-dashoffset: 1; animation: risca .45s cubic-bezier(.6,0,.3,1) .9s forwards; }
+    .three { opacity: 0; animation: aparece .5s ease-out 1.45s forwards; }
+  }
+  @keyframes risca { to { stroke-dashoffset: 0; } }
+  @keyframes aparece { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+<g><g class="l"><circle cx="44" cy="120" r="28"/><path d="M72 92V150"/></g><g class="l"><path d="M92 54V150"/><circle cx="122" cy="120" r="28"/></g><g class="l"><path d="M170 92V150M170 122C170 102 184 92 204 92"/></g><g class="e"><path d="M227 120H281A27 27 0 1 0 274 139"/></g><g class="l"><path d="M302 92L329 150L356 92"/></g><g class="l"><path d="M372 92V150"/><circle class="dot" cx="372" cy="68" r="5.5"/></g><g class="l"><circle cx="418" cy="120" r="28"/><path d="M446 92V150"/></g><g class="l"><path d="M466 92V150M466 122C466 102 480 92 500 92"/></g></g>
+<g class="strike-g"><path class="strike" pathLength="1" d="M216 136L290 106"/></g>
+<g class="three"><path d="M232 18C236 8 244 4 253 4C264 4 272 11 272 20C272 30 263 35 251 35C265 35 275 42 275 53C275 63 266 69 253 69C243 69 235 64 231 56"/></g>
+</svg>
