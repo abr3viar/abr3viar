@@ -11,7 +11,7 @@ export default function Loading() {
         <SkeletonLine className="mt-2 h-4 w-4/5" />
         <div className="mt-8 grid grid-cols-2 gap-2">
           {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className="h-12 rounded-xl border border-wine-100 bg-white" />
+            <div key={i} className="h-12 rounded-control border border-wine-100 bg-white" />
           ))}
         </div>
         <SkeletonCard lines={6} className="mt-6" />

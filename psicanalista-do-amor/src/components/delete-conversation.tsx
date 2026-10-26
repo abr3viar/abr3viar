@@ -19,8 +19,8 @@ export function DeleteConversation({
   className?: string;
 }) {
   return (
-    <details className={`group rounded-xl open:border open:border-red-100 open:bg-white open:p-4 ${className}`}>
-      <summary className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg px-1 text-sm font-medium text-stone-600 hover:text-red-700 group-open:text-red-700">
+    <details className={`group rounded-control open:border open:border-red-100 open:bg-white open:p-4 ${className}`}>
+      <summary className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg px-1 text-sm font-medium text-muted hover:text-red-700 group-open:text-red-700">
         <TrashIcon className="h-4 w-4" />
         {label}
         {srContext && <span className="sr-only"> ({srContext})</span>}

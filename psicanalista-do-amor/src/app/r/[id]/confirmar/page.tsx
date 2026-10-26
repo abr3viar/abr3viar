@@ -34,19 +34,19 @@ export default async function ConfirmarPage(props: { params: Promise<{ id: strin
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Quem é quem na conversa?</h1>
-      <p className="mt-2 text-stone-600">
+      <h1 className="heading-1">Quem é quem na conversa?</h1>
+      <p className="mt-2 text-muted">
         Encontramos {plural(conv.messageCount, "mensagem", "mensagens")}. Confira os nomes e, se quiser, indique qual das
         duas pessoas é você.
       </p>
       <div className="mt-4 space-y-2">
         {typeof w.few_messages === "number" && (
-          <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+          <p className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">
             A conversa tem poucas mensagens de texto ({w.few_messages}). O relatório pode ficar pouco preciso, mas você pode seguir.
           </p>
         )}
         {typeof w.ocr_low_confidence === "number" && (
-          <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+          <p className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">
             {w.ocr_low_confidence === 1
               ? "1 mensagem ficou difícil de ler nas prints."
               : `${plural(w.ocr_low_confidence, "mensagem", "mensagens")} ficaram difíceis de ler nas prints.`}{" "}
@@ -54,19 +54,19 @@ export default async function ConfirmarPage(props: { params: Promise<{ id: strin
           </p>
         )}
         {typeof w.duplicate_images === "number" && (
-          <p className="rounded-xl bg-stone-100 p-4 text-sm text-stone-700">
+          <p className="rounded-control bg-stone-100 p-4 text-sm text-stone-700">
             {w.duplicate_images === 1
               ? "1 print repetida foi ignorada."
               : `${plural(w.duplicate_images, "print repetida", "prints repetidas")} foram ignoradas.`}
           </p>
         )}
         {typeof w.truncated_to_last === "number" && (
-          <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+          <p className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">
             A conversa é muito longa: vamos analisar as últimas {plural(w.truncated_to_last, "mensagem", "mensagens")}.
           </p>
         )}
         {w.single_sender === true && (
-          <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+          <p className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">
             Só encontramos mensagens de uma pessoa. Confira se a conversa foi exportada inteira.
           </p>
         )}

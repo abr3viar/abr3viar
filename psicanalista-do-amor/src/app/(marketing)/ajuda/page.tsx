@@ -19,8 +19,8 @@ export default async function AjudaPage() {
   const faq = buildFaq(prices);
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Ajuda</h1>
-      <p className="mt-3 rounded-xl bg-wine-50 p-3 text-sm text-wine-900">{AI_DISCLAIMER}</p>
+      <h1 className="heading-1">Ajuda</h1>
+      <p className="mt-3 rounded-control bg-wine-50 p-3 text-sm text-wine-900">{AI_DISCLAIMER}</p>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd(faq) }} />
       <dl className="mt-8 space-y-6">
         {faq.map((i) => (
@@ -31,7 +31,7 @@ export default async function AjudaPage() {
         ))}
       </dl>
       <ExportInstructions />
-      <p className="mt-10 text-sm text-stone-600">
+      <p className="mt-10 text-sm text-muted">
         {support ? (
           <>
             Contato (dúvidas, problemas com o pagamento e reembolso):{" "}

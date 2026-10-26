@@ -13,8 +13,8 @@ export default async function VerificarPage(props: { searchParams: Promise<{ tok
   const { token } = await props.searchParams;
   return (
     <div className="mx-auto max-w-md px-4 py-12 text-center">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Quase lá</h1>
-      <p className="mt-2 text-stone-600">Clique para entrar e ver suas análises.</p>
+      <h1 className="heading-1">Quase lá</h1>
+      <p className="mt-2 text-muted">Clique para entrar e ver suas análises.</p>
       <form action={verifyLoginAction} className="mt-6">
         <input type="hidden" name="token" value={token ?? ""} />
         <button type="submit" className="btn-primary">Entrar</button>

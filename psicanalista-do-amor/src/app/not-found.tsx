@@ -6,8 +6,8 @@ export const metadata: Metadata = { title: "Página não encontrada" };
 export default function NotFound() {
   return (
     <div className="mx-auto max-w-xl px-4 py-20 text-center">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Página não encontrada</h1>
-      <p className="mt-3 text-stone-600">O endereço não existe ou você não tem acesso a ele. Se for uma análise sua, entre com o seu e-mail.</p>
+      <h1 className="heading-1">Página não encontrada</h1>
+      <p className="mt-3 text-muted">O endereço não existe ou você não tem acesso a ele. Se for uma análise sua, entre com o seu e-mail.</p>
       <div className="mt-6 flex justify-center gap-3">
         <Link href="/entrar" className="btn-primary">Entrar</Link>
         <Link href="/" className="btn-secondary">Início</Link>

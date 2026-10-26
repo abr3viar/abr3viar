@@ -8,7 +8,7 @@ export function LoginForm({ action }: { action: (prev: State, form: FormData) =>
   const [state, formAction, pending] = useActionState(action, undefined);
   if (state?.sent) {
     return (
-      <p role="status" className="rounded-xl bg-green-50 p-4 text-green-900">
+      <p role="status" className="rounded-control bg-green-50 p-4 text-green-900">
         Se houver análises com esse e-mail, enviamos um link de acesso. Ele vale por 15 minutos. Confira também a caixa de spam.
       </p>
     );

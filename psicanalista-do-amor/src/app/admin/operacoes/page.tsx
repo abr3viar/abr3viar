@@ -15,12 +15,12 @@ export default async function AdminOperacoes(props: { searchParams: Promise<{ ok
   const { failedConversations, failedReports } = await adminFailures();
   return (
     <div className="space-y-6">
-      {ok && <p role="status" className="rounded-xl bg-green-50 p-3 text-sm text-green-900">Feito.</p>}
+      {ok && <p role="status" className="rounded-control bg-green-50 p-3 text-sm text-green-900">Feito.</p>}
       <section className="card space-y-3">
         <h2 className="font-semibold text-wine-900">Tarefas de manutenção</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {JOBS.map((j) => (
-            <form key={j.job} action={adminRunJobAction} className="rounded-xl border border-wine-100 p-3">
+            <form key={j.job} action={adminRunJobAction} className="rounded-control border border-wine-100 p-3">
               <input type="hidden" name="job" value={j.job} />
               <button type="submit" className="btn-secondary text-sm">{j.label}</button>
               <p className="mt-1 text-xs text-stone-500">{j.hint}</p>

@@ -12,8 +12,8 @@ function formatVersion(version: string): string {
 export function LegalPage({ title, version, children }: { title: string; version: string; children: ReactNode }) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">{title}</h1>
-      <p className="mt-2 text-sm text-stone-600">
+      <h1 className="heading-1">{title}</h1>
+      <p className="mt-2 text-sm text-muted">
         Versão de <time dateTime={version}>{formatVersion(version)}</time>
         {!legalReviewDone() && " · texto inicial, em revisão jurídica"}
       </p>

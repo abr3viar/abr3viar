@@ -30,16 +30,16 @@ export default async function ContaPage(props: { searchParams: Promise<{ erro?: 
   if (!viewer) {
     return (
       <div className="mx-auto max-w-xl px-4 py-12 text-center">
-        <h1 className="font-serif text-3xl font-bold text-wine-900">Minha conta</h1>
-        <p className="mt-3 text-stone-600">Entre com seu e-mail para gerenciar seus dados.</p>
+        <h1 className="heading-1">Minha conta</h1>
+        <p className="mt-3 text-muted">Entre com seu e-mail para gerenciar seus dados.</p>
         <Link href="/entrar" className="btn-primary mt-6">Receber link de acesso</Link>
       </div>
     );
   }
   return (
     <div className="mx-auto max-w-2xl space-y-6 px-4 py-10">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Minha conta</h1>
-      <p className="text-stone-600">E-mail: <strong>{viewer.email}</strong></p>
+      <h1 className="heading-1">Minha conta</h1>
+      <p className="text-muted">E-mail: <strong>{viewer.email}</strong></p>
       {!viewer.verified ? (
         <div className="card space-y-3">
           <p className="text-stone-700">
@@ -65,7 +65,7 @@ export default async function ContaPage(props: { searchParams: Promise<{ erro?: 
                 <form action={openBillingPortalAction}>
                   <button type="submit" className="btn-secondary">Gerenciar ou cancelar a assinatura</button>
                 </form>
-                <p className="text-xs text-stone-600">Abre a página segura do Stripe para trocar o cartão, ver as faturas ou cancelar.</p>
+                <p className="text-xs text-muted">Abre a página segura do Stripe para trocar o cartão, ver as faturas ou cancelar.</p>
               </>
             ) : (
               <p className="text-sm text-stone-700">
@@ -75,12 +75,12 @@ export default async function ContaPage(props: { searchParams: Promise<{ erro?: 
           </section>
           <section className="card space-y-3">
             <h2 className="font-semibold text-wine-900">Exportar meus dados</h2>
-            <p className="text-sm text-stone-600">Baixe um arquivo JSON com suas análises, mensagens, relatórios liberados, compras e consentimentos.</p>
+            <p className="text-sm text-muted">Baixe um arquivo JSON com suas análises, mensagens, relatórios liberados, compras e consentimentos.</p>
             <a href="/api/account/export" className="btn-secondary">Baixar meus dados (JSON)</a>
           </section>
           <section className="card space-y-3 border-red-200">
             <h2 className="font-semibold text-red-800">Excluir todos os meus dados</h2>
-            <p className="text-sm text-stone-600">
+            <p className="text-sm text-muted">
               Apaga de forma definitiva todas as análises, conversas e relatórios. Registros de compra ficam apenas pelo prazo
               fiscal, sem nenhum conteúdo, e os registros de acesso (IP, data e hora) ficam por 6 meses, como exige o Marco Civil da
               Internet. Se você tiver assinatura, ela é cancelada na hora, sem novas cobranças. Não dá para desfazer.

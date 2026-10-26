@@ -26,13 +26,13 @@ export default async function AnalisarPage(props: { searchParams: Promise<{ erro
   const viewer = await getViewer();
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Analisar uma conversa</h1>
-      <p className="mt-2 text-stone-600">
+      <h1 className="heading-1">Analisar uma conversa</h1>
+      <p className="mt-2 text-muted">
         Envie a conversa entre duas pessoas. A primeira metade do relatório é grátis. Os arquivos originais são apagados
         logo depois de lidos.
       </p>
       {typeof erro === "string" && (
-        <p role="status" className="mt-6 rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+        <p role="status" className="mt-6 rounded-control bg-amber-50 p-4 text-sm text-amber-900">
           {errorMessage(erro)}
         </p>
       )}

@@ -69,7 +69,7 @@ export function ProgressPoller({
           </form>
         ) : (
           <>
-            <p className="text-sm text-stone-600">Por segurança, os arquivos enviados já foram apagados. Envie a conversa de novo para gerar o relatório.</p>
+            <p className="text-sm text-muted">Por segurança, os arquivos enviados já foram apagados. Envie a conversa de novo para gerar o relatório.</p>
             <Link href="/analisar" className="btn-primary">Enviar outra conversa</Link>
           </>
         )}
@@ -91,7 +91,7 @@ export function ProgressPoller({
             <span
               aria-hidden="true"
               className={`flex h-7 w-7 items-center justify-center rounded-full text-sm font-semibold ${
-                i < currentIndex ? "bg-wine-600 text-white" : i === currentIndex ? "bg-wine-200 text-wine-900 ring-2 ring-wine-300 motion-safe:animate-pulse" : "bg-stone-100 text-stone-600"
+                i < currentIndex ? "bg-wine-600 text-white" : i === currentIndex ? "bg-wine-200 text-wine-900 ring-2 ring-wine-300 motion-safe:animate-pulse" : "bg-stone-100 text-muted"
               }`}
             >
               {i < currentIndex ? "✓" : i + 1}
@@ -113,7 +113,7 @@ export function ProgressPoller({
         </div>
       </div>
       {/* Altura fixa de 3 linhas: a troca de dica não empurra o layout (UX-10). */}
-      <p className="min-h-15 text-sm text-stone-600">{TIPS[tip]}</p>
+      <p className="min-h-15 text-sm text-muted">{TIPS[tip]}</p>
     </div>
   );
 }

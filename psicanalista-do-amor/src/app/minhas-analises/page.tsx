@@ -31,8 +31,8 @@ export default async function MinhasAnalisesPage(props: { searchParams: Promise<
   if (!viewer) {
     return (
       <div className="mx-auto max-w-xl px-4 py-12 text-center">
-        <h1 className="font-serif text-3xl font-bold text-wine-900">Minhas análises</h1>
-        <p className="mt-3 text-stone-600">Entre com o e-mail usado no envio para ver suas análises.</p>
+        <h1 className="heading-1">Minhas análises</h1>
+        <p className="mt-3 text-muted">Entre com o e-mail usado no envio para ver suas análises.</p>
         <Link href="/entrar" className="btn-primary mt-6">Receber link de acesso</Link>
       </div>
     );
@@ -61,17 +61,17 @@ export default async function MinhasAnalisesPage(props: { searchParams: Promise<
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="font-serif text-3xl font-bold text-wine-900">Minhas análises</h1>
-      {excluida && <p role="status" className="mt-4 rounded-xl bg-green-50 p-4 text-sm text-green-900">Análise excluída.</p>}
+      <h1 className="heading-1">Minhas análises</h1>
+      {excluida && <p role="status" className="mt-4 rounded-control bg-green-50 p-4 text-sm text-green-900">Análise excluída.</p>}
       {!viewer.verified && (
-        <p className="mt-4 rounded-xl bg-wine-50 p-4 text-sm text-wine-900">
+        <p className="mt-4 rounded-control bg-wine-50 p-4 text-sm text-wine-900">
           Você está vendo só as análises enviadas deste navegador. Para ver todas as análises do seu e-mail,{" "}
           <Link href="/entrar" className="link">entre com o link de acesso</Link>.
         </p>
       )}
       {rows.length === 0 ? (
         <div className="card mt-6 text-center">
-          <p className="text-stone-600">Nenhuma análise por aqui ainda.</p>
+          <p className="text-muted">Nenhuma análise por aqui ainda.</p>
           <Link href="/analisar" className="btn-primary mt-4">Analisar uma conversa</Link>
         </div>
       ) : (
@@ -82,15 +82,15 @@ export default async function MinhasAnalisesPage(props: { searchParams: Promise<
             const title = a && b ? `${a} & ${b}` : "Conversa enviada";
             const href = c.status === "ready" ? `/r/${c.id}` : c.status === "needs_confirmation" ? `/r/${c.id}/confirmar` : `/r/${c.id}/processando`;
             return (
-              <li key={c.id} className="overflow-hidden rounded-2xl border border-wine-100 bg-white shadow-sm">
+              <li key={c.id} className="overflow-hidden rounded-card border border-wine-100 bg-white shadow-sm">
                 <Link href={href} className="flex items-center justify-between gap-4 p-5 hover:bg-wine-50/60 focus-visible:-outline-offset-2">
                   <div className="min-w-0">
                     <p className="font-semibold text-wine-900">{title}</p>
-                    <p className="text-sm text-stone-600">
+                    <p className="text-sm text-muted">
                       Enviada em {fmt(c.createdAt)} · {STATUS[c.status] ?? c.status}
                       {unlocked.has(c.id) ? " · Relatório completo" : ""}
                     </p>
-                    <p className="text-xs text-stone-600">Exclusão automática em {fmt(c.expiresAt)} se não for acessada.</p>
+                    <p className="text-xs text-muted">Exclusão automática em {fmt(c.expiresAt)} se não for acessada.</p>
                     {planted.has(c.id) && (
                       <p className="mt-1 text-xs font-medium text-amber-800">
                         Enviada sem entrar na conta, de outro aparelho ou navegador. Se não foi você, exclua.

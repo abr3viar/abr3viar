@@ -21,7 +21,7 @@ export default async function PagamentoRetornoPage(props: { searchParams: Promis
     return (
       <div className="mx-auto max-w-xl px-4 py-12 text-center">
         <h1 className="font-serif text-2xl font-bold text-wine-900">Acabou de pagar?</h1>
-        <p className="mt-3 text-stone-600">
+        <p className="mt-3 text-muted">
           Entre com o mesmo e-mail usado no envio da conversa para ver o relatório. Você também recebe um e-mail quando ele
           estiver pronto para ler.
         </p>
@@ -47,7 +47,7 @@ export default async function PagamentoRetornoPage(props: { searchParams: Promis
       ) : (
         <>
           <h1 className="font-serif text-2xl font-bold text-wine-900">Não encontramos uma compra recente</h1>
-          <p className="mt-4 text-stone-600">
+          <p className="mt-4 text-muted">
             Não há um pagamento em andamento neste acesso. Veja suas análises em{" "}
             <Link href="/minhas-analises" className="link">Minhas análises</Link>. Se você pagou, também recebe um e-mail
             quando o relatório estiver pronto para ler.

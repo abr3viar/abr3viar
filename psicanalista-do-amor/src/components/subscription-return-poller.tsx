@@ -56,7 +56,7 @@ export function SubscriptionReturnPoller() {
     return (
       <div className="space-y-4">
         <h1 className="font-serif text-2xl font-bold text-wine-900">Assinatura ativa</h1>
-        <p className="text-stone-600">Pronto! Agora é só abrir uma análise e liberar o relatório completo pela assinatura.</p>
+        <p className="text-muted">Pronto! Agora é só abrir uma análise e liberar o relatório completo pela assinatura.</p>
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link href="/minhas-analises" className="btn-primary">Minhas análises</Link>
           <Link href="/analisar" className="btn-secondary">Analisar uma conversa</Link>
@@ -70,7 +70,7 @@ export function SubscriptionReturnPoller() {
       <h1 className="font-serif text-2xl font-bold text-wine-900">
         {phase === "waiting" ? "Confirmando sua assinatura…" : "A confirmação está demorando"}
       </h1>
-      <p className="text-stone-600">
+      <p className="text-muted">
         {phase === "waiting"
           ? "Isso costuma levar poucos segundos."
           : "Se o pagamento foi aprovado, a assinatura aparece em Minha conta em alguns minutos."}

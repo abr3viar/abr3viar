@@ -22,8 +22,8 @@ export default async function ProcessandoPage(props: {
   if (conv.status === "ready") redirect(`/r/${conv.id}`);
   return (
     <div className="mx-auto max-w-xl px-4 py-12">
-      <h1 className="mb-6 font-serif text-3xl font-bold text-wine-900">Analisando a conversa</h1>
-      {erro && <p className="mb-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-900">{errorMessage(erro)}</p>}
+      <h1 className="mb-6 heading-1">Analisando a conversa</h1>
+      {erro && <p className="mb-4 rounded-control bg-amber-50 p-4 text-sm text-amber-900">{errorMessage(erro)}</p>}
       <ProgressPoller
         conversationId={conv.id}
         initial={conversationStatusView(conv)}

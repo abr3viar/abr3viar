@@ -1,7 +1,7 @@
 export function ExportInstructions() {
   return (
     <section className="mt-12 space-y-4" aria-labelledby="como-exportar">
-      <h2 id="como-exportar" className="font-serif text-2xl font-semibold text-wine-900">
+      <h2 id="como-exportar" className="heading-2">
         Como exportar a conversa do WhatsApp
       </h2>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -24,7 +24,7 @@ export function ExportInstructions() {
           </ol>
         </div>
       </div>
-      <p className="text-sm text-stone-600">
+      <p className="text-sm text-muted">
         Também dá para enviar <strong>prints</strong> da conversa (até 60). Envie na ordem em que as mensagens aparecem.
       </p>
     </section>

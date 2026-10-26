@@ -29,8 +29,8 @@ export default async function AssinaturaPage(props: { searchParams: Promise<{ er
   if (!offer) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center">
-        <h1 className="font-serif text-3xl font-bold text-wine-900">Assinatura mensal</h1>
-        <p className="mt-4 text-stone-600">A assinatura não está disponível no momento. Você pode comprar cada relatório separadamente.</p>
+        <h1 className="heading-1">Assinatura mensal</h1>
+        <p className="mt-4 text-muted">A assinatura não está disponível no momento. Você pode comprar cada relatório separadamente.</p>
         <Link href="/analisar" className="btn-primary mt-6">Analisar uma conversa</Link>
       </div>
     );
@@ -41,10 +41,10 @@ export default async function AssinaturaPage(props: { searchParams: Promise<{ er
     <div className="mx-auto max-w-2xl space-y-8 px-4 py-10">
       <header className="space-y-3 text-center">
         <p className="text-sm font-medium uppercase tracking-wide text-wine-600">Para quem analisa muitas conversas</p>
-        <h1 className="font-serif text-3xl font-bold text-wine-900 sm:text-4xl">Assinatura mensal</h1>
+        <h1 className="heading-1 sm:text-4xl">Assinatura mensal</h1>
         <p className="text-4xl font-bold text-wine-800">
           {price}
-          <span className="text-lg font-medium text-stone-600"> /mês</span>
+          <span className="text-lg font-medium text-muted"> /mês</span>
         </p>
       </header>
 
@@ -65,7 +65,7 @@ export default async function AssinaturaPage(props: { searchParams: Promise<{ er
         <li>Para usar, entre pelo link enviado ao seu e-mail. A assinatura fica ligada a esse e-mail.</li>
       </ul>
 
-      {erro && <p role="alert" className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">{errorMessage(erro)}</p>}
+      {erro && <p role="alert" className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">{errorMessage(erro)}</p>}
 
       <div className="card space-y-4 text-center">
         {state?.active ? (
@@ -89,7 +89,7 @@ export default async function AssinaturaPage(props: { searchParams: Promise<{ er
         {!state?.active && <SubscriptionNotice className="text-center" />}
       </div>
 
-      <p className="rounded-xl bg-wine-50 p-3 text-xs leading-relaxed text-wine-900">{AI_DISCLAIMER}</p>
+      <p className="rounded-control bg-wine-50 p-3 text-xs leading-relaxed text-wine-900">{AI_DISCLAIMER}</p>
     </div>
   );
 }

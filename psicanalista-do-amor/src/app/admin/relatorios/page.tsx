@@ -78,7 +78,7 @@ export default async function AdminRelatorios(props: { searchParams: Promise<Rec
   return (
     <div className="space-y-6">
       {ok && (
-        <p role="status" className="rounded-xl bg-green-50 p-3 text-sm text-green-900">
+        <p role="status" className="rounded-control bg-green-50 p-3 text-sm text-green-900">
           {ok === "conferido"
             ? "Salvo. O Payment Link foi conferido no Stripe."
             : ok === "sem-conferencia"
@@ -86,7 +86,7 @@ export default async function AdminRelatorios(props: { searchParams: Promise<Rec
               : "Salvo."}
         </p>
       )}
-      {erro && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{erro}</p>}
+      {erro && <p role="alert" className="rounded-control bg-red-50 p-3 text-sm text-red-800">{erro}</p>}
       <details className="card text-sm">
         <summary className="cursor-pointer font-semibold text-wine-900">Como criar cada Payment Link no Stripe</summary>
         <ol className="mt-3 list-decimal space-y-1 pl-5 text-stone-700">
@@ -102,8 +102,8 @@ export default async function AdminRelatorios(props: { searchParams: Promise<Rec
           </li>
           <li>Webhook: {appUrl}/api/webhooks/stripe com os eventos: {STRIPE_WEBHOOK_EVENTS.join(", ")}.</li>
         </ol>
-        <p className="mt-2 text-stone-600">Modo atual: <strong>{live ? "produção" : "teste"}</strong> — o site usa os links do modo atual.</p>
-        <p className="mt-2 text-stone-600">
+        <p className="mt-2 text-muted">Modo atual: <strong>{live ? "produção" : "teste"}</strong> — o site usa os links do modo atual.</p>
+        <p className="mt-2 text-muted">
           Taxa do Stripe repassada: <strong>{String(fees.percent).replace(".", ",")}% + R$ {brl(fees.fixedCents)}</strong> (variáveis
           STRIPE_FEE_PERCENT e STRIPE_FEE_FIXED_CENTS). O preço a cobrar é calculado para você receber o valor líquido.
         </p>
@@ -130,12 +130,12 @@ export default async function AdminRelatorios(props: { searchParams: Promise<Rec
               <span className="label">Valor líquido que você quer receber (R$)</span>
               <input name="netPrice" className="input" defaultValue={brl(t.netPriceCents || t.priceCents)} inputMode="decimal" required />
             </label>
-            <div className="rounded-xl bg-wine-50 p-3 text-sm sm:col-span-2">
+            <div className="rounded-control bg-wine-50 p-3 text-sm sm:col-span-2">
               Preço a cobrar no Payment Link: <strong className="text-lg text-wine-900">R$ {brl(t.priceCents)}</strong>
               {t.kind === "subscription" ? " por mês " : " "}
-              <span className="text-stone-600">(você recebe ≈ R$ {brl(netFromGross(t.priceCents, stripeFeesFor(t.kind)))} depois da taxa)</span>
+              <span className="text-muted">(você recebe ≈ R$ {brl(netFromGross(t.priceCents, stripeFeesFor(t.kind)))} depois da taxa)</span>
               {t.kind === "subscription" && (
-                <p className="mt-1 text-stone-600">
+                <p className="mt-1 text-muted">
                   Inclui a tarifa do Stripe Billing de {String(stripeFeesFor(t.kind).percent - fees.percent).replace(".", ",")}% (variável
                   STRIPE_SUBSCRIPTION_EXTRA_FEE_PERCENT).
                 </p>
@@ -150,12 +150,12 @@ export default async function AdminRelatorios(props: { searchParams: Promise<Rec
             <label className="block sm:col-span-2"><span className="label">Descrição</span><textarea name="description" className="input" rows={2} defaultValue={t.description} required /></label>
             <label className="block"><span className="label">Ordem</span><input name="sortOrder" type="number" className="input" defaultValue={t.sortOrder} /></label>
           </div>
-          <fieldset className="grid gap-3 rounded-xl border border-wine-100 p-3 sm:grid-cols-2">
+          <fieldset className="grid gap-3 rounded-control border border-wine-100 p-3 sm:grid-cols-2">
             <legend className="px-1 text-sm font-semibold">Payment Link — TESTE</legend>
             <label className="block"><span className="label">ID (plink_...)</span><input name="stripeTestPaymentLinkId" className="input font-mono text-sm" defaultValue={t.stripeTestPaymentLinkId ?? ""} /></label>
             <label className="block"><span className="label">URL</span><input name="stripeTestPaymentLinkUrl" className="input font-mono text-sm" defaultValue={t.stripeTestPaymentLinkUrl ?? ""} /></label>
           </fieldset>
-          <fieldset className="grid gap-3 rounded-xl border border-wine-100 p-3 sm:grid-cols-2">
+          <fieldset className="grid gap-3 rounded-control border border-wine-100 p-3 sm:grid-cols-2">
             <legend className="px-1 text-sm font-semibold">Payment Link — PRODUÇÃO</legend>
             <label className="block"><span className="label">ID (plink_...)</span><input name="stripePaymentLinkId" className="input font-mono text-sm" defaultValue={t.stripePaymentLinkId ?? ""} /></label>
             <label className="block"><span className="label">URL</span><input name="stripePaymentLinkUrl" className="input font-mono text-sm" defaultValue={t.stripePaymentLinkUrl ?? ""} /></label>

@@ -45,7 +45,7 @@ export function ConfirmForm({
       {isGroup && (
         <div className="card space-y-3">
           <h2 className="font-semibold text-wine-900">Esta conversa tem mais de duas pessoas</h2>
-          <p className="text-sm text-stone-600">Escolha as duas pessoas que serão analisadas.</p>
+          <p className="text-sm text-muted">Escolha as duas pessoas que serão analisadas.</p>
           <div className="grid gap-4 sm:grid-cols-2">
             {(["a", "b"] as const).map((slot) => (
               <label key={slot} className="block">
@@ -66,7 +66,7 @@ export function ConfirmForm({
             ))}
           </div>
           {samePerson && (
-            <p id="same-person" role="status" className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
+            <p id="same-person" role="status" className="rounded-control bg-amber-50 p-3 text-sm text-amber-900">
               Você escolheu a mesma pessoa duas vezes. Escolha duas pessoas diferentes para continuar.
             </p>
           )}
@@ -99,7 +99,7 @@ export function ConfirmForm({
               />
             </label>
             {s.samples.length > 0 && (
-              <ul className="space-y-1 text-sm text-stone-600" aria-label="Exemplos de mensagens">
+              <ul className="space-y-1 text-sm text-muted" aria-label="Exemplos de mensagens">
                 {s.samples.map((sample, i) => (
                   <li key={i} className="rounded-lg bg-wine-50 px-3 py-2">“{sample}”</li>
                 ))}
@@ -113,12 +113,12 @@ export function ConfirmForm({
       <div className="card">
         <fieldset className="space-y-3">
           <legend className="font-semibold text-wine-900">Qual das duas é você?</legend>
-          <p className="text-sm text-stone-600">Opcional, mas deixa o relatório mais pessoal e libera &quot;Como responder a última mensagem&quot;.</p>
+          <p className="text-sm text-muted">Opcional, mas deixa o relatório mais pessoal e libera &quot;Como responder a última mensagem&quot;.</p>
           <div className="grid gap-2 sm:grid-cols-3">
             {(["a", "b", "none"] as const).map((v) => (
               <label
                 key={v}
-                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-wine-200 bg-white px-4 py-2.5 text-sm font-medium text-ink hover:border-wine-400 has-[:checked]:border-wine-600 has-[:checked]:bg-wine-50 has-[:checked]:text-wine-900 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-wine-600"
+                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-control border border-wine-200 bg-white px-4 py-2.5 text-sm font-medium text-ink hover:border-wine-400 has-[:checked]:border-wine-600 has-[:checked]:bg-wine-50 has-[:checked]:text-wine-900 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-wine-600"
               >
                 <input type="radio" name="userIs" value={v} defaultChecked={v === "none"} className="h-4 w-4 shrink-0 accent-wine-600 focus-visible:outline-none" />
                 <span className="min-w-0 break-words">
@@ -143,7 +143,7 @@ export function ConfirmForm({
         <input type="hidden" name="timezone" value={timezone} />
       )}
 
-      {state?.error && <p role="alert" className="rounded-xl bg-red-50 p-4 text-sm text-red-800">{state.error}</p>}
+      {state?.error && <p role="alert" className="rounded-control bg-red-50 p-4 text-sm text-red-800">{state.error}</p>}
       <div className="space-y-2">
         <button
           type="submit"

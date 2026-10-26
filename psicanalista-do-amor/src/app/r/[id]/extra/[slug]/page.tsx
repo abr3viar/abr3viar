@@ -48,9 +48,9 @@ export default async function ExtraPage(props: { params: Promise<{ id: string; s
         <ArrowLeftIcon className="h-4 w-4" />
         Voltar ao relatório principal
       </Link>
-      <h1 className="font-serif text-3xl font-bold text-wine-900">{rt.name}</h1>
-      <p className="text-stone-600">{main.participants.a} & {main.participants.b}</p>
-      <p className="rounded-xl bg-wine-50 p-3 text-xs leading-relaxed text-wine-900">{AI_DISCLAIMER}</p>
+      <h1 className="heading-1">{rt.name}</h1>
+      <p className="text-muted">{main.participants.a} & {main.participants.b}</p>
+      <p className="rounded-control bg-wine-50 p-3 text-xs leading-relaxed text-wine-900">{AI_DISCLAIMER}</p>
     </header>
   );
 
@@ -112,7 +112,7 @@ export default async function ExtraPage(props: { params: Promise<{ id: string; s
         <div className="card space-y-3" role="alert">
           <p className="font-semibold text-wine-900">Não conseguimos gerar este relatório</p>
           <p className="text-stone-700">{errorMessage(view.errorCode)}</p>
-          <p className="text-sm text-stone-600">
+          <p className="text-sm text-muted">
             Seu pagamento está confirmado e este relatório continua sendo seu. Tentar de novo não gera nenhuma nova
             cobrança. Se continuar falhando, fale com a gente pelo contato da{" "}
             <Link href="/ajuda" className="underline underline-offset-2">Ajuda</Link>: resolvemos o problema ou devolvemos o

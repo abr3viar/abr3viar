@@ -131,10 +131,10 @@ export function PaymentReturnPoller({ reportId }: { reportId: string }) {
             chegar, e você recebe um e-mail quando ele estiver pronto para ler. Pode fechar esta página.
           </p>
         ) : (
-          <p className="text-stone-600">Assim que o Stripe confirmar, você vai direto para o relatório.</p>
+          <p className="text-muted">Assim que o Stripe confirmar, você vai direto para o relatório.</p>
         )}
         {phase === "slow" && (
-          <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+          <p className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">
             Pix pode levar alguns instantes. Você recebe um e-mail quando o relatório estiver pronto para ler. Pode fechar
             esta página.
           </p>

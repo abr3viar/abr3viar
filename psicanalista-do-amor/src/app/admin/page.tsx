@@ -12,11 +12,11 @@ export default async function AdminHome() {
   const missingLinks = o.types.filter((t) => t.isActive && !(live ? t.stripePaymentLinkUrl : t.stripeTestPaymentLinkUrl));
   return (
     <div className="space-y-6">
-      <p className="rounded-xl bg-wine-50 p-3 text-sm text-wine-900">
+      <p className="rounded-control bg-wine-50 p-3 text-sm text-wine-900">
         Stripe em modo <strong>{live ? "PRODUÇÃO" : "TESTE"}</strong> (definido pela STRIPE_SECRET_KEY).
       </p>
       {missingLinks.length > 0 && (
-        <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+        <p className="rounded-control bg-amber-50 p-4 text-sm text-amber-900">
           Sem Payment Link de {live ? "produção" : "teste"} (botão de compra desabilitado): {missingLinks.map((t) => t.name).join(", ")}.{" "}
           <a href="/admin/relatorios" className="underline">Configurar</a>
         </p>
