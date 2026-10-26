@@ -223,9 +223,10 @@ export default async function Home(props: { searchParams: Promise<{ "dados-exclu
               <p className="text-lg font-semibold text-wine-800">
                 {prices.extraFromCents ? `${prices.extraUniform ? "" : "a partir de "}${formatPrice(prices.extraFromCents, prices.currency)}` : "—"}
               </p>
+              <p className="text-sm font-semibold text-ink">Pagamento único por relatório.</p>
               <p className="hint">
-                Pagamento único por relatório, disponível depois do relatório completo, sobre a mesma conversa. Por exemplo:
-                quem demonstra mais interesse, padrões de conflito ou como responder a última mensagem.
+                Disponíveis depois do relatório completo, sobre a mesma conversa. Por exemplo: quem demonstra mais interesse,
+                padrões de conflito ou como responder a última mensagem.
               </p>
             </li>
             {prices.subscriptionCents != null && (
@@ -235,9 +236,9 @@ export default async function Home(props: { searchParams: Promise<{ "dados-exclu
                   {formatPrice(prices.subscriptionCents, prices.currency)}
                   <span className="text-sm font-medium text-muted"> /mês</span>
                 </p>
+                <p className="text-sm font-semibold text-ink">No cartão, com renovação automática. Cancele quando quiser.</p>
                 <p className="hint">
-                  No cartão, com renovação automática. Cancele quando quiser. Até {SUBSCRIPTION_DAILY_LIMIT} relatórios
-                  completos por dia, com os relatórios adicionais incluídos.
+                  Até {SUBSCRIPTION_DAILY_LIMIT} relatórios completos por dia, com os relatórios adicionais incluídos.
                   {prices.overageCents ? ` Passou do limite no dia? Cada relatório a mais custa ${formatPrice(prices.overageCents, prices.currency)}.` : ""}
                 </p>
                 <Link href="/assinatura" className="link inline-flex min-h-11 items-center text-sm">

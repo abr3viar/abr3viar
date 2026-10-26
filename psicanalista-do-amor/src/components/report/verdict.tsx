@@ -11,8 +11,8 @@ export function Verdict({ verdict, twoSided, names }: { verdict: VerdictView; tw
         (twoSided ? (
           <div>
             <div className="flex justify-between gap-3 text-sm font-semibold text-ink">
-              <span>{names.a} · {score}%</span>
-              <span>{100 - score}% · {names.b}</span>
+              <span>{names.a} — {score}%</span>
+              <span>{100 - score}% — {names.b}</span>
             </div>
             <div className="mt-2 flex h-3 overflow-hidden rounded-full" role="img" aria-label={`${names.a} ${score}%, ${names.b} ${100 - score}%`}>
               <div className="bg-wine-600" style={{ width: `${score}%` }} />
