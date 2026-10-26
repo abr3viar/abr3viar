@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { errorMessage } from "@/lib/messages";
-import { ArchiveIcon, FileTextIcon, ImagesIcon, TextIcon } from "./icons";
+import { AlertIcon, ArchiveIcon, CheckIcon, FileTextIcon, ImagesIcon, TextIcon } from "./icons";
 import { DEFAULT_UPLOAD_LIMITS, type UploadLimits } from "@/lib/upload-limits";
 
 export type UploadMode = "paste" | "txt" | "zip" | "images";
@@ -139,7 +139,7 @@ export function UploadForm({
             {MODES.filter((t) => modes.includes(t.mode)).map((t) => (
               <label
                 key={t.mode}
-                className="relative flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border border-wine-200 bg-white px-3 py-2 text-center text-sm font-medium text-wine-800 hover:border-wine-400 hover:bg-wine-50 has-[:checked]:border-wine-600 has-[:checked]:bg-wine-600 has-[:checked]:text-white has-[:disabled]:cursor-not-allowed has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-wine-600 motion-safe:transition"
+                className="relative flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-control border border-field bg-paper px-3 py-2 text-center text-sm font-semibold text-wine-800 hover:border-wine-600 hover:bg-wine-50 has-[:checked]:border-wine-700 has-[:checked]:bg-wine-700 has-[:checked]:text-white has-[:disabled]:cursor-not-allowed has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-wine-600 motion-safe:transition-colors"
               >
                 <input
                   type="radio"
@@ -149,7 +149,7 @@ export function UploadForm({
                   onChange={() => changeMode(t.mode)}
                   // Invisível, mas do tamanho do cartão (não `sr-only` de 1 px): o toque cai no
                   // próprio rádio e o leitor de tela do celular mostra o foco no cartão inteiro.
-                  className="absolute inset-0 m-0 h-full w-full cursor-pointer appearance-none rounded-xl opacity-0 disabled:cursor-not-allowed"
+                  className="absolute inset-0 m-0 h-full w-full cursor-pointer appearance-none rounded-control opacity-0 disabled:cursor-not-allowed"
                 />
                 {t.icon}
                 {t.label}
@@ -158,9 +158,9 @@ export function UploadForm({
           </div>
         </fieldset>
 
-        <div className="card space-y-3">
+        <div className="card space-y-4">
           {/* Altura mínima: a dica de cada modo tem tamanho diferente e não pode empurrar o resto. */}
-          <p className="min-h-10 text-sm text-stone-600">{active.hint}</p>
+          <p className="hint min-h-10">{active.hint}</p>
           {mode === "paste" ? (
             <>
               <label htmlFor="text" className="label">Conversa</label>
@@ -197,14 +197,18 @@ export function UploadForm({
                       ? ".zip,application/zip"
                       : ".txt,text/plain"
                 }
-                className="block w-full rounded-xl text-sm file:mr-4 file:min-h-11 file:cursor-pointer file:rounded-full file:border-0 file:bg-wine-100 file:px-4 file:py-2 file:font-medium file:text-wine-800 hover:file:bg-wine-200"
+                aria-invalid={error ? true : undefined}
+                className="block w-full rounded-control border border-field bg-paper text-sm text-ink file:mr-4 file:min-h-11 file:cursor-pointer file:border-0 file:bg-wine-100 file:px-4 file:py-2 file:font-semibold file:text-wine-900 hover:file:bg-wine-200 aria-[invalid=true]:border-red-700"
               />
-              <p id="files-help" className="text-xs text-stone-600">
-                {picked
-                  ? `${picked.count} ${picked.count === 1 ? "arquivo selecionado" : "arquivos selecionados"} · ${mb(picked.bytes)} MB`
-                  : mode === "images"
-                    ? `Até ${limits.maxImages} prints, de até ${mb(limits.maxImageBytes)} MB cada (${mb(limits.maxTotalBytes)} MB no total).`
-                    : `Até ${mb(limits.maxTotalBytes)} MB.`}
+              <p id="files-help" className={`flex items-start gap-1.5 text-xs ${error ? "font-medium text-red-800" : picked ? "font-medium text-green-900" : "text-muted"}`}>
+                {picked && !error && <CheckIcon className="mt-px h-4 w-4 text-green-700" />}
+                <span>
+                  {picked
+                    ? `${picked.count} ${picked.count === 1 ? "arquivo selecionado" : "arquivos selecionados"} · ${mb(picked.bytes)} MB${error ? "" : " · tamanho ok"}`
+                    : mode === "images"
+                      ? `Até ${limits.maxImages} prints, de até ${mb(limits.maxImageBytes)} MB cada (${mb(limits.maxTotalBytes)} MB no total).`
+                      : `Até ${mb(limits.maxTotalBytes)} MB.`}
+                </span>
               </p>
             </>
           )}
@@ -225,11 +229,11 @@ export function UploadForm({
               placeholder="voce@exemplo.com"
               aria-describedby={switchingEmail ? "email-help email-switch" : "email-help"}
             />
-            <p id="email-help" className="mt-1 text-xs text-stone-600">
+            <p id="email-help" className="mt-1.5 text-xs text-muted">
               Usamos o e-mail para você voltar à análise de outro aparelho e para avisos sobre ela. Nada de spam.
             </p>
             {switchingEmail && (
-              <p id="email-switch" className="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-900">
+              <p id="email-switch" className="alert alert-warning mt-3 text-xs">
                 Este navegador está conectado com {defaultEmail}. Se você enviar com outro e-mail, esta análise fica no novo
                 endereço e o navegador passa a usá-lo. Para voltar às análises de {defaultEmail}, é só{" "}
                 <a href="/entrar" className="underline underline-offset-2">pedir um link de acesso</a> com ele.
@@ -241,7 +245,7 @@ export function UploadForm({
             {CONSENTS.map((c) => (
               <label
                 key={c.name}
-                className={`flex min-h-11 cursor-pointer items-start gap-3 py-1.5 text-sm text-stone-700 ${c.highlight ? "rounded-xl border border-amber-300 bg-amber-50 px-3 py-2.5" : ""}`}
+                className={`flex min-h-11 cursor-pointer items-start gap-3 py-1.5 text-sm text-ink ${c.highlight ? "rounded-control border border-amber-400 bg-amber-50 px-3 py-2.5" : ""}`}
               >
                 <input type="checkbox" name={c.name} required className="mt-0.5 h-5 w-5 shrink-0 accent-wine-600" />
                 <span>{c.label}</span>
@@ -251,16 +255,17 @@ export function UploadForm({
         </div>
 
         {error && (
-          <p id="upload-error" role="alert" className="rounded-xl bg-red-50 p-4 text-sm text-red-800">
-            {error}
+          <p id="upload-error" role="alert" className="alert alert-danger">
+            <AlertIcon className="mt-0.5 h-5 w-5 text-red-700" />
+            <span>{error}</span>
           </p>
         )}
 
         <div className="space-y-2">
-          <button type="submit" className="btn-primary min-h-12 w-full sm:w-auto">
+          <button type="submit" className="btn-primary min-h-12 w-full px-6 text-base sm:w-auto">
             {step === "sending" ? "Enviando…" : step === "opening" ? "Abrindo a análise…" : "Analisar conversa"}
           </button>
-          <p aria-live="polite" className="min-h-5 text-sm text-stone-600">
+          <p aria-live="polite" className="min-h-5 text-sm text-muted">
             {step === "sending"
               ? "Enviando a conversa com segurança. Não feche esta página."
               : step === "opening"
