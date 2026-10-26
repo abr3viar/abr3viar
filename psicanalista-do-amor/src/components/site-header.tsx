@@ -4,13 +4,13 @@ import { HeaderNav } from "./header-nav";
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-wine-100 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-3 py-1.5 sm:px-4 sm:py-2.5">
+    <header className="border-b border-wine-100 bg-paper/95 backdrop-blur-sm">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-2 sm:py-3">
         <Link
           href="/"
-          className="flex min-h-11 shrink-0 items-center gap-2 rounded-lg pr-1 font-serif text-[1.05rem] font-semibold whitespace-nowrap text-wine-800 sm:text-lg"
+          className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-control pr-2 font-serif text-base font-semibold whitespace-nowrap text-wine-900 sm:text-lg"
         >
-          <BrandMark className="h-7 w-7 shrink-0" />
+          <BrandMark className="h-8 w-8 shrink-0" />
           Psicanalista do Amor
         </Link>
         <HeaderNav />

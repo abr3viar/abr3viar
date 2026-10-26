@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/*
+ * Sistema visual do Psicanalista do Amor. Tudo que se repete no site vem daqui:
+ * cor, tipografia, raio, sombra e estados. Telas usam as classes de componente abaixo
+ * em vez de recompor cor e borda na mão.
+ *
+ * Contraste (WCAG AA): texto sobre papel ≥ 4,5:1; bordas de campo ≥ 3:1 (1.4.11).
+ * Fontes: pilha do sistema, sem fontes externas (privacidade e CSP).
+ */
 @theme {
   --color-wine-50: #fdf2f4;
   --color-wine-100: #fbe4e9;
@@ -13,8 +21,37 @@
   --color-wine-900: #5e1730;
   --color-cream: #fffaf6;
   --color-ink: #2a1a20;
+
+  /* Papéis semânticos (usados pelas classes de componente). */
+  --color-paper: #ffffff;
+  --color-muted: #57534e; /* 7,4:1 sobre cream: texto de apoio */
+  --color-field: #857176; /* borda de campo: 4,5:1 sobre branco */
+  --color-disabled-bg: #e7e5e4;
+  --color-disabled-ink: #57534e;
+
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Serif só para títulos. */
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+
+  /* Escala tipográfica (fluida entre 375 px e 1280 px). */
+  --text-display: clamp(2.125rem, 1.45rem + 2.9vw, 3.5rem);
+  --text-display--line-height: 1.08;
+  --text-h1: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  --text-h1--line-height: 1.15;
+  --text-h2: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --text-h2--line-height: 1.2;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.3;
+  --text-reading: 1.0625rem;
+  --text-reading--line-height: 1.75;
+
+  /* Raios: dois só. Controles 12 px, superfícies 16 px. */
+  --radius-control: 0.75rem;
+  --radius-card: 1rem;
+
+  /* Sombras: quase planas. Elevação só para o que pede atenção (preço em destaque). */
+  --shadow-card: 0 1px 2px rgb(42 26 32 / 0.04), 0 6px 18px -12px rgb(42 26 32 / 0.14);
+  --shadow-raised: 0 2px 4px rgb(42 26 32 / 0.05), 0 18px 36px -18px rgb(94 23 48 / 0.28);
 }
 
 :root {
@@ -44,6 +81,8 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 @layer base {
@@ -65,41 +104,104 @@ body {
   summary::-webkit-details-marker {
     display: none;
   }
+  /* Sem texto colado em cima de imagem/SVG decorativo. */
+  svg {
+    flex-shrink: 0;
+  }
 }
 
 @layer components {
+  /* ---------- Tipografia ---------- */
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.14em] text-wine-700 uppercase;
+  }
+  .heading-display {
+    @apply font-serif text-display font-semibold text-wine-900 text-balance;
+  }
+  .heading-1 {
+    @apply font-serif text-h1 font-semibold text-wine-900 text-balance;
+  }
+  .heading-2 {
+    @apply font-serif text-h2 font-semibold text-wine-900 text-balance;
+  }
+  .heading-3 {
+    @apply font-serif text-h3 font-semibold text-wine-900;
+  }
+  .lead {
+    @apply text-lg leading-relaxed text-muted;
+  }
+  .hint {
+    @apply text-sm leading-relaxed text-muted;
+  }
+
+  /* ---------- Botões: três variações, um tamanho mínimo de 44 px ---------- */
   .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-wine-600 px-6 py-3 text-center font-semibold text-white shadow-sm hover:bg-wine-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:bg-wine-300 motion-safe:transition;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-control bg-wine-600 px-5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-wine-700 active:bg-wine-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:bg-disabled-bg disabled:text-disabled-ink disabled:shadow-none motion-safe:transition-colors;
   }
   .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-wine-200 bg-white px-5 py-2.5 text-center font-medium text-wine-800 hover:border-wine-400 hover:bg-wine-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:transition;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-control border border-wine-300 bg-white px-5 py-2.5 text-center font-semibold text-wine-800 hover:border-wine-600 hover:bg-wine-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:border-stone-300 disabled:bg-stone-50 disabled:text-disabled-ink motion-safe:transition-colors;
   }
   .btn-danger {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-red-200 bg-white px-5 py-2.5 text-center font-medium text-red-700 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:transition;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-control border border-red-300 bg-white px-5 py-2.5 text-center font-semibold text-red-800 hover:border-red-700 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700 disabled:cursor-not-allowed disabled:text-disabled-ink motion-safe:transition-colors;
+  }
+
+  /* ---------- Superfícies ---------- */
+  .card {
+    @apply rounded-card border border-wine-100 bg-paper p-5 shadow-card sm:p-6;
+  }
+  .card-featured {
+    @apply rounded-card border border-wine-300 bg-paper p-5 shadow-raised sm:p-6;
   }
   .link {
-    @apply rounded-sm font-medium text-wine-700 underline decoration-wine-300 underline-offset-4 hover:decoration-wine-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600;
+    @apply rounded-sm font-medium text-wine-700 underline decoration-wine-300 underline-offset-4 hover:text-wine-800 hover:decoration-wine-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 motion-safe:transition-colors;
   }
-  .card {
-    @apply rounded-2xl border border-wine-100 bg-white p-6 shadow-sm;
+
+  /* ---------- Campos ---------- */
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
   }
   .input {
-    @apply min-h-11 w-full rounded-xl border border-wine-200 bg-white px-4 py-3 text-ink placeholder:text-stone-500 focus:border-wine-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-wine-600 disabled:bg-stone-50;
+    @apply min-h-11 w-full rounded-control border border-field bg-paper px-3.5 py-2.5 text-ink placeholder:text-stone-500 hover:border-wine-600 focus:border-wine-600 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:border-stone-300 disabled:bg-stone-50 aria-[invalid=true]:border-red-700 motion-safe:transition-colors;
   }
-  .label {
-    @apply mb-1 block text-sm font-medium text-stone-700;
+
+  /* ---------- Avisos: todos os estados de mensagem passam por aqui ---------- */
+  .alert {
+    @apply flex gap-3 rounded-card border p-4 text-sm leading-relaxed;
+  }
+  .alert-info {
+    @apply border-wine-200 bg-wine-50 text-wine-900;
+  }
+  .alert-success {
+    @apply border-green-300 bg-green-50 text-green-900;
+  }
+  .alert-warning {
+    @apply border-amber-300 bg-amber-50 text-amber-950;
+  }
+  .alert-danger {
+    @apply border-red-300 bg-red-50 text-red-900;
+  }
+  .alert-safety {
+    @apply border-2 border-amber-400 bg-amber-50 p-5 text-amber-950 sm:p-6;
+  }
+  .error-text {
+    @apply flex items-start gap-2 text-sm font-medium text-red-800;
+  }
+
+  /* ---------- Conteúdo do relatório ---------- */
+  .prose-report {
+    @apply text-reading text-ink;
   }
   .prose-report p {
-    @apply mb-3 leading-relaxed;
+    @apply mb-4 last:mb-0;
   }
   .prose-report ul {
-    @apply mb-3 list-disc space-y-1 pl-6;
+    @apply mb-4 list-disc space-y-1.5 pl-6;
   }
   .prose-report ol {
-    @apply mb-3 list-decimal space-y-1 pl-6;
+    @apply mb-4 list-decimal space-y-1.5 pl-6;
   }
   .prose-report blockquote {
-    @apply my-3 border-l-4 border-wine-200 pl-4 italic text-stone-600;
+    @apply my-4 border-l-4 border-wine-300 pl-4 text-muted italic;
   }
   .prose-report strong {
     @apply font-semibold text-wine-900;
