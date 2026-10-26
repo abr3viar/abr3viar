@@ -1,0 +1,42 @@
+# dependências
+/node_modules
+/.pnp
+.pnp.*
+
+# testes
+/coverage
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
+
+# next.js
+/.next/
+/.next-e2e/
+/out/
+
+# build
+/build
+/dist
+
+# misc
+.DS_Store
+*.pem
+
+# logs
+npm-debug.log*
+*.log
+
+# variáveis de ambiente (NUNCA commitar segredos)
+.env*
+!.env.example
+
+# dados locais (uploads, outbox de e-mail em dev)
+.data/
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

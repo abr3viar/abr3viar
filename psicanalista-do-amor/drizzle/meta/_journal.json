@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1792942543409,
+      "tag": "0000_inicial",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792947638429,
+      "tag": "0001_liquido-e-taxa-stripe",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792978107187,
+      "tag": "0002_assinatura-mensal",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792987210656,
+      "tag": "0003_consentimento-sensivel",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792987359333,
+      "tag": "0004_registro-de-acesso-marco-civil",
+      "breakpoints": true
+    }
+  ]
+}

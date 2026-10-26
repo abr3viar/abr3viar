@@ -1,0 +1,57 @@
+# Desenvolvimento local (opcional). Nada em produção depende deste arquivo.
+#   docker compose up -d db            # só o Postgres
+#   docker compose up --build          # Postgres + web + worker (imagem de produção)
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: psicanalista
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d psicanalista"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  web:
+    build: .
+    env_file: .env
+    environment:
+      PROCESS_TYPE: web
+      DATABASE_URL: postgres://app:app@db:5432/psicanalista
+      NODE_ENV: production
+      ALLOW_LOCAL_STORAGE_IN_PRODUCTION: "1"
+      STORAGE_DRIVER: local
+      STORAGE_LOCAL_DIR: /data/uploads
+    ports:
+      - "3000:3000"
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    build: .
+    env_file: .env
+    environment:
+      PROCESS_TYPE: worker
+      DATABASE_URL: postgres://app:app@db:5432/psicanalista
+      NODE_ENV: production
+      ALLOW_LOCAL_STORAGE_IN_PRODUCTION: "1"
+      STORAGE_DRIVER: local
+      STORAGE_LOCAL_DIR: /data/uploads
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  uploads:

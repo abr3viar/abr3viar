@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wine-50: #fdf2f4;
+  --color-wine-100: #fbe4e9;
+  --color-wine-200: #f6c9d4;
+  --color-wine-300: #ee9fb2;
+  --color-wine-400: #e2698a;
+  --color-wine-500: #d03f68;
+  --color-wine-600: #b42a53;
+  --color-wine-700: #961f44;
+  --color-wine-800: #7c1d3c;
+  --color-wine-900: #5e1730;
+  --color-cream: #fffaf6;
+  --color-ink: #2a1a20;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Rolagem suave só para quem não pediu menos movimento (âncoras #desbloquear, #extras). */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* UX-7: quem pede menos movimento não vê animação nem transição (inclui as de bibliotecas). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  /* UX-15: um único anel de foco, visível em qualquer fundo claro. */
+  :where(a, button, summary, select, textarea, input, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-wine-600);
+    outline-offset: 2px;
+  }
+  /* Âncoras não ficam coladas no topo da tela ao rolar. */
+  :where([id]) {
+    scroll-margin-top: 1rem;
+  }
+  fieldset {
+    min-width: 0;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-wine-600 px-6 py-3 text-center font-semibold text-white shadow-sm hover:bg-wine-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:bg-wine-300 motion-safe:transition;
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-wine-200 bg-white px-5 py-2.5 text-center font-medium text-wine-800 hover:border-wine-400 hover:bg-wine-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:transition;
+  }
+  .btn-danger {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-red-200 bg-white px-5 py-2.5 text-center font-medium text-red-700 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:transition;
+  }
+  .link {
+    @apply rounded-sm font-medium text-wine-700 underline decoration-wine-300 underline-offset-4 hover:decoration-wine-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine-600;
+  }
+  .card {
+    @apply rounded-2xl border border-wine-100 bg-white p-6 shadow-sm;
+  }
+  .input {
+    @apply min-h-11 w-full rounded-xl border border-wine-200 bg-white px-4 py-3 text-ink placeholder:text-stone-500 focus:border-wine-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-wine-600 disabled:bg-stone-50;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-stone-700;
+  }
+  .prose-report p {
+    @apply mb-3 leading-relaxed;
+  }
+  .prose-report ul {
+    @apply mb-3 list-disc space-y-1 pl-6;
+  }
+  .prose-report ol {
+    @apply mb-3 list-decimal space-y-1 pl-6;
+  }
+  .prose-report blockquote {
+    @apply my-3 border-l-4 border-wine-200 pl-4 italic text-stone-600;
+  }
+  .prose-report strong {
+    @apply font-semibold text-wine-900;
+  }
+}

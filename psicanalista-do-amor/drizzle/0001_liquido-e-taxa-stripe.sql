@@ -1,0 +1,1 @@
+ALTER TABLE "report_types" ADD COLUMN "net_price_cents" integer DEFAULT 0 NOT NULL;

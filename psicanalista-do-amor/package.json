@@ -1,0 +1,77 @@
+{
+  "name": "psicanalista-do-amor",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "worker": "tsx --conditions=react-server --tsconfig tsconfig.json worker/index.ts",
+    "build": "next build && node scripts/postbuild.mjs",
+    "start": "node scripts/start.mjs",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --conditions=react-server scripts/migrate.ts",
+    "db:seed": "tsx --conditions=react-server scripts/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "lint": "eslint && node scripts/check-invariants.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "format": "prettier --write .",
+    "start:web": "node .next/standalone/server.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1156.0",
+    "@tailwindcss/turbopack": "^4.3.3",
+    "@types/node": "^22.20.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/yauzl": "^3.4.0",
+    "dotenv": "^18.0.9",
+    "drizzle-orm": "^0.45.4",
+    "esbuild": "^0.28.2",
+    "file-type": "^22.2.0",
+    "groq-sdk": "^1.6.0",
+    "next": "^16.4.3",
+    "nodemailer": "^10.2.1",
+    "pg": "^8.23.1",
+    "pg-boss": "^12.38.0",
+    "pino": "^10.4.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "resend": "^6.34.1",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "stripe": "^23.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "uuid": "^14.0.3",
+    "yauzl": "^3.4.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/yazl": "^3.3.1",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.3",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "vitest": "^5.0.5",
+    "yazl": "^3.3.1"
+  },
+  "overrides": {
+    "@esbuild-kit/core-utils": {
+      "esbuild": "$esbuild"
+    }
+  }
+}

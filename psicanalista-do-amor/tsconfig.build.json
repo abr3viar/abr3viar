@@ -1,0 +1,16 @@
+{
+  "//": "Usado pelo `next build` (produção). Deixa de fora testes e configs de dev, que dependem de devDependencies (vitest, playwright, drizzle-kit) — a Square Cloud pode instalar só as dependências de produção. O `npm run typecheck` continua checando TUDO com o tsconfig.json.",
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".next",
+    ".next-e2e",
+    "playwright-report",
+    "test-results",
+    "tests",
+    "vitest.config.ts",
+    "playwright.config.ts",
+    "drizzle.config.ts"
+  ]
+}

@@ -1,0 +1,3 @@
+Era uma vez um texto qualquer que não é uma conversa.
+Ele tem várias linhas, mas nenhuma no formato esperado.
+Não deveria ser reconhecido por nenhum parser.
