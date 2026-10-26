@@ -28,19 +28,19 @@ export function ExtrasShowcase({
   return (
     <section aria-labelledby="extras" className="space-y-4">
       <div>
-        <h2 id="extras" className="font-serif text-2xl font-semibold text-wine-900">Quer ir mais fundo?</h2>
-        <p className="mt-1 text-stone-600">
+        <h2 id="extras" className="heading-2">Quer ir mais fundo?</h2>
+        <p className="mt-1 text-muted">
           Relatórios adicionais sobre a mesma conversa, gerados na hora.
           {includedAction && " Incluídos na sua assinatura."}
         </p>
       </div>
-      <ul className="divide-y divide-wine-100 rounded-2xl border border-wine-100 bg-white shadow-sm sm:grid sm:grid-cols-2 sm:gap-4 sm:divide-y-0 sm:border-0 sm:bg-transparent sm:shadow-none">
+      <ul className="divide-y divide-wine-100 rounded-card border border-wine-100 bg-white shadow-sm sm:grid sm:grid-cols-2 sm:gap-4 sm:divide-y-0 sm:border-0 sm:bg-transparent sm:shadow-none">
         {offers.map((o) => (
           <li key={o.slug} className="sm:flex">
-            <article className="flex w-full flex-col gap-3 p-5 sm:rounded-2xl sm:border sm:border-wine-100 sm:bg-white sm:shadow-sm">
+            <article className="flex w-full flex-col gap-3 p-5 sm:rounded-card sm:border sm:border-wine-100 sm:bg-white sm:shadow-sm">
               <div className="flex-1">
                 <h3 className="font-semibold text-wine-900">{o.name}</h3>
-                <p className="mt-1 text-sm text-stone-600">{o.teaser}</p>
+                <p className="mt-1 text-sm text-muted">{o.teaser}</p>
               </div>
               {o.state === "ready" || o.state === "queued" || o.state === "generating" || o.state === "failed" ? (
                 <Link href={`/r/${conversationId}/extra/${o.slug}`} className="btn-secondary px-4 text-sm sm:w-full sm:text-base">

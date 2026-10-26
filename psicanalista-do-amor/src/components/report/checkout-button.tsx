@@ -24,7 +24,7 @@ export function CheckoutButton({
     <div className="space-y-3">
       <p className="flex items-baseline justify-center gap-2">
         <span className="text-3xl font-bold text-wine-900">{formatPrice(priceCents, currency)}</span>
-        <span className="text-sm text-stone-600">pagamento único, sem recorrência</span>
+        <span className="text-sm text-muted">pagamento único, sem recorrência</span>
       </p>
       <form action={action}>
         <input type="hidden" name="conversationId" value={conversationId} />

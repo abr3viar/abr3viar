@@ -34,7 +34,7 @@ export function ReportProgress({ reportId, initial }: { reportId: string; initia
       <div className="h-2 overflow-hidden rounded-full bg-wine-100">
         <div className="h-full rounded-full bg-wine-500 motion-safe:animate-pulse motion-safe:transition-all" style={{ width: `${pct ?? (state.status === "queued" ? 15 : 60)}%` }} />
       </div>
-      <p className="text-sm text-stone-600">Pagamento confirmado. Estamos escrevendo seu relatório — leva de alguns segundos a poucos minutos.</p>
+      <p className="text-sm text-muted">Pagamento confirmado. Estamos escrevendo seu relatório — leva de alguns segundos a poucos minutos.</p>
     </div>
   );
 }

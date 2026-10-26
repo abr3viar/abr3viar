@@ -64,12 +64,12 @@ export default async function ReportPage(props: {
   // Dois pontos de compra (UX-2): logo depois do gancho e no fim das seções bloqueadas
   // (#desbloquear, para onde apontam os links "Disponível no relatório completo").
   const cta = !view.isUnlocked ? (
-    <div className="card space-y-4 border-wine-300 text-center">
+    <div className="card-featured space-y-4 text-center">
       <div className="space-y-1">
-        <p className="font-serif text-xl font-semibold text-wine-900">
+        <p className="heading-3 text-balance">
           {hasSafety ? "Sobre o relatório completo" : "Continue lendo o relatório completo"}
         </p>
-        <p className="text-sm text-stone-600">
+        <p className="text-sm text-muted">
           {hasSafety
             ? `${lockedCount === 1 ? "A seção restante fica" : `As outras ${lockedCount} seções ficam`} no relatório completo, se e quando fizer sentido para você.`
             : lockedCount === 1
@@ -81,8 +81,8 @@ export default async function ReportPage(props: {
     </div>
   ) : null;
   const ctaEnd = !view.isUnlocked ? (
-    <div id="desbloquear" className="card space-y-4 border-2 border-wine-300 bg-wine-50/40 text-center">
-      <p className="font-serif text-xl font-semibold text-wine-900">
+    <div id="desbloquear" className="card-featured space-y-4 border-2 border-wine-400 text-center">
+      <p className="heading-3 text-balance">
         {hasSafety ? "Relatório completo" : lockedCount === 1 ? "Leia a seção que falta" : `Leia as ${lockedCount} seções que faltam`}
       </p>
       <div className="mx-auto max-w-sm">{checkout}</div>
@@ -90,16 +90,16 @@ export default async function ReportPage(props: {
   ) : null;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 px-4 py-10">
-      <header className="space-y-3">
-        <p className="text-sm font-medium uppercase tracking-wide text-wine-600">Relatório</p>
-        <h1 className="font-serif text-3xl font-bold text-wine-900">
+    <div className="mx-auto max-w-3xl space-y-10 px-4 py-10 sm:py-14">
+      <header className="space-y-4">
+        <p className="eyebrow">Relatório</p>
+        <h1 className="heading-1">
           {view.participants.a} & {view.participants.b}
         </h1>
-        <p className="rounded-xl bg-wine-50 p-3 text-xs leading-relaxed text-wine-900">{AI_DISCLAIMER}</p>
-        {erro && <p role="alert" className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">{errorMessage(erro)}</p>}
+        <p className="alert alert-info text-xs leading-relaxed sm:text-sm">{AI_DISCLAIMER}</p>
+        {erro && <p role="alert" className="alert alert-danger">{errorMessage(erro)}</p>}
         {planted && (
-          <p role="note" className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+          <p role="note" className="alert alert-warning">
             Esta análise foi enviada sem entrar na conta, de outro aparelho ou navegador. Se não foi você que enviou esta conversa,
             não pague: exclua a análise no fim da página. Ao comprar, só quem entra pelo link do seu e-mail continua com acesso.
           </p>

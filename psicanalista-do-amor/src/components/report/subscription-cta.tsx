@@ -69,7 +69,7 @@ export function SubscriptionAwareCheckout({
             action={checkoutAction}
           />
         ) : (
-          <p className="text-sm text-stone-600">Volte amanhã para liberar este relatório pela assinatura.</p>
+          <p className="text-sm text-muted">Volte amanhã para liberar este relatório pela assinatura.</p>
         )}
       </div>
     );
