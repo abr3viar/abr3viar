@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AI_DISCLAIMER } from "@/lib/copy";
 import { formatPrice } from "@/lib/views";
 import { LockedSection } from "@/components/report/locked-section";
-import { EyeOffIcon, FileEraseIcon, ShieldIcon, TrashIcon } from "@/components/icons";
+import { ArrowRightIcon, EyeOffIcon, FileEraseIcon, ShieldIcon, TrashIcon } from "@/components/icons";
 import { publicPrices } from "@/server/reports/pricing";
 import { SUBSCRIPTION_DAILY_LIMIT } from "@/lib/subscription";
 import { LANDING_FAQ_IDS, buildFaq, faqJsonLd, jsonLd } from "@/lib/faq";
@@ -84,150 +84,186 @@ export default async function Home(props: { searchParams: Promise<{ "dados-exclu
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structured }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd(faq) }} />
       {deleted && (
-        <p role="status" className="mx-auto mt-6 max-w-3xl rounded-xl bg-green-50 p-4 text-center text-sm text-green-900">
-          Pronto: seus dados foram excluídos. Enviamos uma confirmação para o seu e-mail.
-        </p>
+        <div role="status" className="alert alert-success mx-auto mt-6 max-w-3xl px-4 sm:px-6">
+          <p>Pronto: seus dados foram excluídos. Enviamos uma confirmação para o seu e-mail.</p>
+        </div>
       )}
-      <section className="bg-gradient-to-b from-wine-50 to-cream">
-        <div className="mx-auto max-w-5xl px-4 pt-12 pb-10 text-center sm:pt-20 sm:pb-16">
-          <p className="text-sm font-semibold uppercase tracking-widest text-wine-600">Análise de conversas por IA</p>
-          <h1 className="mx-auto mt-4 max-w-3xl font-serif text-4xl font-bold leading-tight text-wine-900 sm:text-5xl">
-            Cole a conversa, descubra o que está nas entrelinhas.
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-stone-600">
+
+      {/* Hero: a proposta à esquerda e uma prévia do relatório (texto fictício) à direita. */}
+      <section className="mx-auto grid max-w-5xl gap-10 px-4 pt-10 pb-12 sm:pt-16 sm:pb-16 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-14">
+        <div>
+          <p className="eyebrow">Análise de conversas por IA</p>
+          <h1 className="heading-display mt-4">Cole a conversa e descubra o que está nas entrelinhas.</h1>
+          <p className="lead mt-5 max-w-xl">
             Quem puxa assunto, como cada um demonstra afeto, onde estão os atritos e o que muda tudo. Uma leitura da
             dinâmica entre duas pessoas, a partir do que vocês escreveram.
           </p>
-          <div className="mx-auto mt-8 flex max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
-            <Link href="/analisar" className="btn-primary min-h-12 text-lg">Analisar uma conversa</Link>
-            <a href="#exemplo" className="btn-secondary min-h-12">Ver um exemplo</a>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link href="/analisar" className="btn-primary min-h-12 px-6 text-base sm:text-lg">
+              Analisar uma conversa
+              <ArrowRightIcon className="h-5 w-5" />
+            </Link>
+            <a href="#exemplo" className="btn-secondary min-h-12 px-6 text-base">Ver um exemplo</a>
           </div>
-          <p className="mt-4 text-sm text-stone-600">
+          <p className="hint mt-4">
             Primeira metade grátis · relatório completo {formatPrice(prices.mainCents, prices.currency)} em pagamento único
             {prices.subscriptionCents ? ` · ou assinatura com até ${SUBSCRIPTION_DAILY_LIMIT} por dia` : ""}
           </p>
         </div>
+
+        <figure aria-label="Prévia de um relatório fictício" className="card relative space-y-4 overflow-hidden">
+          <figcaption className="flex items-center justify-between gap-3 text-xs font-medium text-muted">
+            <span className="eyebrow">Prévia · fictício</span>
+            <span>Bia & Rafa</span>
+          </figcaption>
+          <p className="heading-3">O retrato de vocês dois</p>
+          <p className="text-sm leading-relaxed text-ink">
+            Os dois procuram um ao outro, mas de jeitos diferentes. Em três palavras: <strong className="text-wine-900">cumplicidade, ritmo, expectativa</strong>.
+          </p>
+          <div className="space-y-2" role="img" aria-label="Iniciativa: Bia 62%, Rafa 38%">
+            <div className="flex justify-between text-xs font-medium text-muted">
+              <span>Bia · 62%</span>
+              <span>38% · Rafa</span>
+            </div>
+            <div className="flex h-2.5 overflow-hidden rounded-full">
+              <div className="bg-wine-600" style={{ width: "62%" }} />
+              <div className="bg-wine-200" style={{ width: "38%" }} />
+            </div>
+          </div>
+          <LockedSection position={0} lockedTitle="O momento de virada" lengthHint="short" headingLevel={3} unlockHref="#precos" tone="paper" />
+        </figure>
       </section>
 
-      <section aria-labelledby="confianca" className="border-y border-wine-100 bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8">
+      {/* Garantias: lista com separadores, não grade de cartões. */}
+      <section aria-labelledby="confianca" className="border-y border-wine-100 bg-paper">
+        <div className="mx-auto max-w-5xl px-4 py-6">
           <h2 id="confianca" className="sr-only">Como cuidamos da sua conversa</h2>
-          <ul className="grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
             {TRUST.map(({ text, Icon }) => (
-              <li key={text} className="flex items-center gap-3 text-sm font-medium text-ink">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-wine-50 text-wine-700">
-                  <Icon className="h-5 w-5" />
-                </span>
+              <li key={text} className="flex items-start gap-3 text-sm font-medium text-ink">
+                <Icon className="mt-0.5 h-5 w-5 text-wine-700" />
                 {text}
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-sm">
+          <p className="mt-5 text-sm">
             <Link href="/privacidade" className="link">Veja como cuidamos dos seus dados</Link>
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-16" aria-labelledby="como">
-        <h2 id="como" className="text-center font-serif text-3xl font-bold text-wine-900">Como funciona</h2>
-        {/* Linha do tempo: vertical no celular, horizontal a partir de sm. */}
-        <ol className="mx-auto mt-10 max-w-md space-y-8 sm:grid sm:max-w-none sm:grid-cols-3 sm:gap-8 sm:space-y-0">
+      <section className="mx-auto max-w-5xl px-4 py-16 sm:py-20" aria-labelledby="como">
+        <p className="eyebrow">Passo a passo</p>
+        <h2 id="como" className="heading-2 mt-2">Como funciona</h2>
+        <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-10">
           {STEPS.map((s, i) => (
-            <li key={s.title} className="relative flex gap-4 sm:flex-col sm:gap-4">
-              {i < STEPS.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  className="absolute top-11 -bottom-6 left-[1.1875rem] w-px bg-wine-200 sm:top-5 sm:right-[-1.5rem] sm:bottom-auto sm:left-14 sm:h-px sm:w-auto"
-                />
-              )}
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-wine-600 font-semibold text-white">{i + 1}</span>
-              <div>
-                <h3 className="font-semibold text-wine-900">{s.title}</h3>
-                <p className="mt-1 text-sm text-stone-600">{s.text}</p>
-              </div>
+            <li key={s.title} className="border-t-2 border-wine-200 pt-5">
+              <span className="font-serif text-sm font-semibold text-wine-600">0{i + 1}</span>
+              <h3 className="heading-3 mt-1">{s.title}</h3>
+              <p className="hint mt-2">{s.text}</p>
             </li>
           ))}
         </ol>
       </section>
 
-      <section id="exemplo" className="bg-white py-16" aria-labelledby="exemplo-titulo">
-        <div className="mx-auto max-w-3xl space-y-6 px-4">
-          <h2 id="exemplo-titulo" className="text-center font-serif text-3xl font-bold text-wine-900">Um exemplo (fictício)</h2>
-          <p className="text-center text-sm text-stone-600">Bia e Rafa não existem. A conversa e a análise abaixo foram inventadas para mostrar o formato.</p>
-          <article className="card">
-            <h3 className="font-serif text-xl font-semibold text-wine-900">O retrato de vocês dois</h3>
-            <p className="mt-3 leading-relaxed text-stone-800">
-              Bia e Rafa conversam quase todos os dias, com um tom leve e cheio de piadas internas. A conversa sugere uma
-              relação em construção: os dois procuram um ao outro, mas de jeitos diferentes. Em três palavras:{" "}
-              <strong>cumplicidade, ritmo, expectativa</strong>.
-            </p>
+      <section id="exemplo" className="border-y border-wine-100 bg-paper py-16 sm:py-20" aria-labelledby="exemplo-titulo">
+        <div className="mx-auto max-w-2xl space-y-8 px-4">
+          <div className="text-center">
+            <p className="eyebrow">Exemplo</p>
+            <h2 id="exemplo-titulo" className="heading-2 mt-2">Um exemplo (fictício)</h2>
+            <p className="hint mt-3">Bia e Rafa não existem. A conversa e a análise abaixo foram inventadas para mostrar o formato.</p>
+          </div>
+          {/* Uma folha só, com seções separadas por filete: o relatório lê-se como texto, não como painel. */}
+          <article className="space-y-7 border-l-2 border-wine-100 pl-5 sm:pl-7">
+            <section>
+              <h3 className="heading-3">O retrato de vocês dois</h3>
+              <p className="prose-report mt-2">
+                Bia e Rafa conversam quase todos os dias, com um tom leve e cheio de piadas internas. A conversa sugere uma
+                relação em construção: os dois procuram um ao outro, mas de jeitos diferentes. Em três palavras:{" "}
+                <strong>cumplicidade, ritmo, expectativa</strong>.
+              </p>
+            </section>
+            <section>
+              <h3 className="heading-3">O ritmo da conversa</h3>
+              <p className="prose-report mt-2">
+                Bia inicia <strong>62%</strong> das conversas depois de longos silêncios e costuma responder em poucos minutos.
+                Rafa demora mais, mas escreve mensagens mais longas — um padrão que aparece principalmente à noite.
+              </p>
+              <blockquote className="mt-3 border-l-4 border-wine-300 pl-4 text-sm text-muted italic">
+                “desculpa a demora, tava pensando no que você falou ontem”
+              </blockquote>
+            </section>
           </article>
-          <article className="card">
-            <h3 className="font-serif text-xl font-semibold text-wine-900">O ritmo da conversa</h3>
-            <p className="mt-3 leading-relaxed text-stone-800">
-              Bia inicia <strong>62%</strong> das conversas depois de longos silêncios e costuma responder em poucos minutos.
-              Rafa demora mais, mas escreve mensagens mais longas — um padrão que aparece principalmente à noite.
-            </p>
-            <blockquote className="mt-3 border-l-4 border-wine-200 pl-4 text-sm italic text-stone-600">
-              “desculpa a demora, tava pensando no que você falou ontem”
-            </blockquote>
-          </article>
-          <p className="rounded-2xl bg-wine-900 p-6 font-serif text-lg italic text-white">
+          <p className="rounded-card bg-wine-900 p-6 font-serif text-lg leading-relaxed text-cream italic">
             Mas o jeito como Rafa responde quando a conversa fica séria conta uma história diferente da que vimos até aqui…
           </p>
-          <LockedSection position={5} lockedTitle="O dia em que algo mudou entre vocês" lengthHint="medium" headingLevel={3} unlockHref="#precos" />
+          <LockedSection position={5} lockedTitle="O dia em que algo mudou entre vocês" lengthHint="medium" headingLevel={3} unlockHref="#precos" tone="paper" />
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-16" aria-labelledby="precos">
-        <h2 id="precos" className="text-center font-serif text-3xl font-bold text-wine-900">Preço</h2>
-        <div className={`mx-auto mt-8 grid gap-6 sm:grid-cols-2 ${prices.subscriptionCents ? "max-w-5xl lg:grid-cols-3" : "max-w-3xl"}`}>
-          <div className="card">
-            <h3 className="font-semibold text-wine-900">Relatório completo</h3>
-            <p className="mt-2 text-3xl font-bold text-wine-800">{formatPrice(prices.mainCents, prices.currency)}</p>
-            <p className="mt-1 text-sm font-medium text-stone-700">Pagamento único, sem recorrência.</p>
-            <p className="mt-2 text-sm text-stone-600">A primeira metade é grátis. O completo tem 8 seções, com o momento de virada, quem está mais investido, os atritos e conselhos práticos.</p>
-          </div>
-          <div className="card">
-            <h3 className="font-semibold text-wine-900">Relatórios adicionais</h3>
-            <p className="mt-2 text-3xl font-bold text-wine-800">
-              {prices.extraFromCents ? `${prices.extraUniform ? "" : "a partir de "}${formatPrice(prices.extraFromCents, prices.currency)}` : "—"}
+      <section className="mx-auto max-w-5xl px-4 py-16 sm:py-20" aria-labelledby="precos">
+        <p className="eyebrow text-center">Preço</p>
+        <h2 id="precos" className="heading-2 mt-2 text-center">Pague uma vez ou assine</h2>
+        <div className="mx-auto mt-10 grid max-w-4xl gap-5 lg:grid-cols-5">
+          {/* Oferta principal em destaque (3 colunas no desktop). */}
+          <div className="card-featured flex flex-col lg:col-span-3">
+            <p className="eyebrow">Relatório completo</p>
+            <p className="mt-3 font-serif text-4xl font-semibold text-wine-900">{formatPrice(prices.mainCents, prices.currency)}</p>
+            <p className="mt-1 text-sm font-semibold text-ink">Pagamento único, sem recorrência.</p>
+            <p className="hint mt-4">
+              A primeira metade é grátis. O completo tem 8 seções, com o momento de virada, quem está mais investido, os
+              atritos e conselhos práticos.
             </p>
-            <p className="mt-1 text-sm font-medium text-stone-700">Pagamento único por relatório.</p>
-            <p className="mt-2 text-sm text-stone-600">Disponíveis depois do relatório completo, sobre a mesma conversa. Por exemplo: quem demonstra mais interesse, padrões de conflito ou como responder a última mensagem.</p>
+            <Link href="/analisar" className="btn-primary mt-6 w-full sm:w-auto">Analisar uma conversa</Link>
           </div>
-          {prices.subscriptionCents != null && (
-            <div className="card border-2 border-wine-300">
-              <h3 className="font-semibold text-wine-900">Assinatura mensal</h3>
-              <p className="mt-2 text-3xl font-bold text-wine-800">
-                {formatPrice(prices.subscriptionCents, prices.currency)}
-                <span className="text-base font-medium text-stone-600"> /mês</span>
+          {/* Demais ofertas: uma lista única, em vez de três cartões iguais. */}
+          <ul className="divide-y divide-wine-100 rounded-card border border-wine-100 bg-paper lg:col-span-2">
+            <li className="space-y-1 p-5 sm:p-6">
+              <p className="font-semibold text-wine-900">Relatórios adicionais</p>
+              <p className="text-lg font-semibold text-wine-800">
+                {prices.extraFromCents ? `${prices.extraUniform ? "" : "a partir de "}${formatPrice(prices.extraFromCents, prices.currency)}` : "—"}
               </p>
-              <p className="mt-1 text-sm font-medium text-stone-700">No cartão, com renovação automática. Cancele quando quiser.</p>
-              <p className="mt-2 text-sm text-stone-600">
-                Até {SUBSCRIPTION_DAILY_LIMIT} relatórios completos por dia, com os relatórios adicionais incluídos.
-                {prices.overageCents ? ` Passou do limite no dia? Cada relatório a mais custa ${formatPrice(prices.overageCents, prices.currency)}.` : ""}
+              <p className="hint">
+                Pagamento único por relatório, disponível depois do relatório completo, sobre a mesma conversa. Por exemplo:
+                quem demonstra mais interesse, padrões de conflito ou como responder a última mensagem.
               </p>
-              <Link href="/assinatura" className="btn-secondary mt-4 w-full">Conhecer a assinatura</Link>
-            </div>
-          )}
+            </li>
+            {prices.subscriptionCents != null && (
+              <li className="space-y-1 p-5 sm:p-6">
+                <p className="font-semibold text-wine-900">Assinatura mensal</p>
+                <p className="text-lg font-semibold text-wine-800">
+                  {formatPrice(prices.subscriptionCents, prices.currency)}
+                  <span className="text-sm font-medium text-muted"> /mês</span>
+                </p>
+                <p className="hint">
+                  No cartão, com renovação automática. Cancele quando quiser. Até {SUBSCRIPTION_DAILY_LIMIT} relatórios
+                  completos por dia, com os relatórios adicionais incluídos.
+                  {prices.overageCents ? ` Passou do limite no dia? Cada relatório a mais custa ${formatPrice(prices.overageCents, prices.currency)}.` : ""}
+                </p>
+                <Link href="/assinatura" className="link inline-flex min-h-11 items-center text-sm">
+                  Conhecer a assinatura
+                  <ArrowRightIcon className="ml-1 h-4 w-4" />
+                </Link>
+              </li>
+            )}
+          </ul>
         </div>
       </section>
 
-      <section className="bg-white py-16" aria-labelledby="faq">
+      <section className="border-t border-wine-100 bg-paper py-16 sm:py-20" aria-labelledby="faq">
         <div className="mx-auto max-w-3xl px-4">
-          <h2 id="faq" className="text-center font-serif text-3xl font-bold text-wine-900">Perguntas frequentes</h2>
-          <dl className="mt-8 space-y-6">
+          <h2 id="faq" className="heading-2 text-center">Perguntas frequentes</h2>
+          <dl className="mt-10 divide-y divide-wine-100">
             {faq.map((i) => (
-              <div key={i.id}>
+              <div key={i.id} className="py-5 first:pt-0">
                 <dt className="font-semibold text-wine-900">{i.q}</dt>
-                <dd className="mt-1 text-stone-700">{i.a}</dd>
+                <dd className="mt-2 leading-relaxed text-ink">{i.a}</dd>
               </div>
             ))}
           </dl>
-          <p className="mt-10 rounded-xl bg-wine-50 p-4 text-sm text-wine-900">{AI_DISCLAIMER}</p>
-          <div className="mt-8 text-center">
-            <Link href="/analisar" className="btn-primary min-h-12 w-full text-lg sm:w-auto">Analisar uma conversa</Link>
+          <p className="alert alert-info mt-10 text-sm">{AI_DISCLAIMER}</p>
+          <div className="mt-10 text-center">
+            <Link href="/analisar" className="btn-primary min-h-12 w-full px-6 text-base sm:w-auto sm:text-lg">Analisar uma conversa</Link>
           </div>
         </div>
       </section>
